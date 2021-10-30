@@ -1,2 +1,2 @@
 ## Brainstormy
-An interactive educational games website
+An interactive educational games website..

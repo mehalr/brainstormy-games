@@ -71,6 +71,10 @@ main{
  align-items: center;
 }
 
+#tagline{
+    font-size: 15px;
+}
+
 main .right-sec{
  padding-right: 10px;
 }
