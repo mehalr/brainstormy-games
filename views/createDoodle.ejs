@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>create quiz</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+body {
+  background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.wrapper {
+  width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+}
+
+.controls {
+  width: 294px;
+  margin: 15px auto;
+}
+
+hr{
+  color: #fa4299;
+  background-color: #fa4299;
+  border-top: 2px solid #F4069D;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #ffff;
+}
+  </style>
+  <!-- include font awesome -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+  <h1>Create Quiz</h1>
+  <div class="wrapper">
+    <form method="post" id="framework_form">
+    <div class="form-group">
+     <h3>Select objects for doodle:</h3>
+     <select id="framework" name="question" multiple class="form-control" >
+      <option value='flashlight'>flashlight</option>                                                                                                        
+<option value='belt'>belt</option>                                                                                                                    
+<option value='mushroom'>mushroom</option>                                                                                                            
+<option value='pond'>pond</option>                                                                                                                    
+<option value='strawberry'>strawberry</option>                                                                                                        
+<option value='pineapple'>pineapple</option>                                                                                                          
+<option value='sun'>sun</option>                                                                                                                      
+<option value='cow'>cow</option>                                                                                                                      
+<option value='ear'>ear</option>                                                                                                                      
+<option value='bush'>bush</option>                                                                                                                    
+<option value='pliers'>pliers</option>                                                                                                                
+<option value='watermelon'>watermelon</option>                                                                                                        
+<option value='apple'>apple</option>                                                                                                                  
+<option value='baseball'>baseball</option>                                                                                                            
+<option value='feather'>feather</option>                                                                                                              
+<option value='shoe'>shoe</option>                                                                                                                    
+<option value='leaf'>leaf</option>                                                                                                                    
+<option value='lollipop'>lollipop</option>                                                                                                            
+<option value='crown'>crown</option>                                                                                                                  
+<option value='ocean'>ocean</option>                                                                                                                  
+<option value='horse'>horse</option>                                                                                                                  
+<option value='mountain'>mountain</option>                                                                                                            
+<option value='mosquito'>mosquito</option>                                                                                                            
+<option value='mug'>mug</option>                                                                                                                      
+<option value='hospital'>hospital</option>                                                                                                            
+<option value='saw'>saw</option>                                                                                                                      
+<option value='castle'>castle</option>                                                                                                                
+<option value='angel'>angel</option>                                                                                                                  
+<option value='underwear'>underwear</option>                                                                                                          
+<option value='traffic_light'>traffic_light</option>                                                                                                  
+<option value='cruise_ship'>cruise_ship</option>                                                                                                      
+<option value='marker'>marker</option>                                                                                                                
+<option value='blueberry'>blueberry</option>                                                                                                          
+<option value='flamingo'>flamingo</option>                                                                                                            
+<option value='face'>face</option>                                                                                                                    
+<option value='hockey_stick'>hockey_stick</option>                                                                                                    
+<option value='bucket'>bucket</option>                                                                                                                
+<option value='campfire'>campfire</option>                                                                                                            
+<option value='asparagus'>asparagus</option>                                                                                                          
+<option value='skateboard'>skateboard</option>                                                                                                        
+<option value='door'>door</option>                                                                                                                    
+<option value='suitcase'>suitcase</option>                                                                                                            
+<option value='skull'>skull</option>                                                                                                                  
+<option value='cloud'>cloud</option>                                                                                                                  
+<option value='paint_can'>paint_can</option>                                                                                                          
+<option value='hockey_puck'>hockey_puck</option>                                                                                                      
+<option value='steak'>steak</option>                                                                                                                  
+<option value='house_plant'>house_plant</option>                                                                                                      
+<option value='sleeping_bag'>sleeping_bag</option>                                                                                                    
+<option value='bench'>bench</option>                                                                                                                  
+<option value='snowman'>snowman</option>                                                                                                              
+<option value='arm'>arm</option>                                                                                                                      
+<option value='crayon'>crayon</option>                                                                                                                
+<option value='fan'>fan</option>                                                                                                                      
+<option value='shovel'>shovel</option>                                                                                                                
+<option value='leg'>leg</option>                                                                                                                      
+<option value='washing_machine'>washing_machine</option>                                                                                              
+<option value='harp'>harp</option>                                                                                                                    
+<option value='toothbrush'>toothbrush</option>                                                                                                        
+<option value='tree'>tree</option>                                                                                                                    
+<option value='bear'>bear</option>                                                                                                                    
+<option value='rake'>rake</option>                                                                                                                    
+<option value='megaphone'>megaphone</option>                                                                                                          
+<option value='knee'>knee</option>                                                                                                                    
+<option value='guitar'>guitar</option>                                                                                                                
+<option value='calculator'>calculator</option>                                                                                                        
+<option value='hurricane'>hurricane</option>                                                                                                          
+<option value='grapes'>grapes</option>                                                                                                                
+<option value='paintbrush'>paintbrush</option>                                                                                                        
+<option value='couch'>couch</option>                                                                                                                  
+<option value='nose'>nose</option>                                                                                                                    
+<option value='square'>square</option>                                                                                                                
+<option value='wristwatch'>wristwatch</option>                                                                                                        
+<option value='penguin'>penguin</option>                                                                                                              
+<option value='bridge'>bridge</option>                                                                                                                
+<option value='octagon'>octagon</option>                                                                                                              
+<option value='submarine'>submarine</option>                                                                                                          
+<option value='screwdriver'>screwdriver</option>                                                                                                      
+<option value='rollerskates'>rollerskates</option>                                                                                                    
+<option value='ladder'>ladder</option>                                                                                                                
+<option value='wine_bottle'>wine_bottle</option>                                                                                                      
+<option value='cake'>cake</option>                                                                                                                    
+<option value='bracelet'>bracelet</option>                                                                                                            
+<option value='broom'>broom</option>                                                                                                                  
+<option value='yoga'>yoga</option>                                                                                                                    
+<option value='finger'>finger</option>                                                                                                                
+<option value='fish'>fish</option>                                                                                                                    
+<option value='line'>line</option>                                                                                                                    
+<option value='truck'>truck</option>                                                                                                                  
+<option value='snake'>snake</option>                                                                                                                  
+<option value='bus'>bus</option>                                                                                                                      
+<option value='stitches'>stitches</option>                                                                                                            
+<option value='snorkel'>snorkel</option>                                                                                                              
+<option value='shorts'>shorts</option>                                                                                                                
+<option value='bowtie'>bowtie</option>                                                                                                                
+<option value='pickup_truck'>pickup_truck</option>                                                                                                    
+<option value='tooth'>tooth</option>                                                                                                                  
+<option value='snail'>snail</option>                                                                                                                  
+<option value='foot'>foot</option>                                                                                                                    
+<option value='crab'>crab</option>                                                                                                                    
+<option value='school_bus'>school_bus</option>                                                                                                        
+<option value='train'>train</option>                                                                                                                  
+<option value='dresser'>dresser</option>                                                                                                              
+<option value='sock'>sock</option>                                                                                                                    
+<option value='tractor'>tractor</option>                                                                                                              
+<option value='map'>map</option>                                                                                                                      
+<option value='hedgehog'>hedgehog</option>                                                                                                            
+<option value='coffee_cup'>coffee_cup</option>                                                                                                        
+<option value='computer'>computer</option>                                                                                                            
+<option value='matches'>matches</option>                                                                                                              
+<option value='beard'>beard</option>                                                                                                                  
+<option value='frog'>frog</option>                                                                                                                    
+<option value='crocodile'>crocodile</option>                                                                                                          
+<option value='bathtub'>bathtub</option>                                                                                                              
+<option value='rain'>rain</option>                                                                                                                    
+<option value='moon'>moon</option>                                                                                                                    
+<option value='bee'>bee</option>                                                                                                                      
+<option value='knife'>knife</option>                                                                                                                  
+<option value='boomerang'>boomerang</option>                                                                                                          
+<option value='lighthouse'>lighthouse</option>                                                                                                        
+<option value='chandelier'>chandelier</option>                                                                                                        
+<option value='jail'>jail</option>                                                                                                                    
+<option value='pool'>pool</option>                                                                                                                    
+<option value='stethoscope'>stethoscope</option>                                                                                                      
+<option value='frying_pan'>frying_pan</option>                                                                                                        
+<option value='cell_phone'>cell_phone</option>                                                                                                        
+<option value='binoculars'>binoculars</option>                                                                                                        
+<option value='purse'>purse</option>                                                                                                                  
+<option value='lantern'>lantern</option>                                                                                                              
+<option value='birthday_cake'>birthday_cake</option>                                                                                                  
+<option value='clarinet'>clarinet</option>                                                                                                            
+<option value='palm_tree'>palm_tree</option>                                                                                                          
+<option value='aircraft_carrier'>aircraft_carrier</option>                                                                                            
+<option value='vase'>vase</option>                                                                                                                    
+<option value='eraser'>eraser</option>                                                                                                                
+<option value='shark'>shark</option>                                                                                                                  
+<option value='skyscraper'>skyscraper</option>                                                                                                        
+<option value='bicycle'>bicycle</option>                                                                                                              
+<option value='sink'>sink</option>                                                                                                                    
+<option value='teapot'>teapot</option>                                                                                                                
+<option value='circle'>circle</option>                                                                                                                
+<option value='tornado'>tornado</option>                                                                                                              
+<option value='bird'>bird</option>                                                                                                                    
+<option value='stereo'>stereo</option>                                                                                                                
+<option value='mouth'>mouth</option>                                                                                                                  
+<option value='key'>key</option>                                                                                                                      
+<option value='hot_dog'>hot_dog</option>                                                                                                              
+<option value='spoon'>spoon</option>                                                                                                                  
+<option value='laptop'>laptop</option>                                                                                                                
+<option value='cup'>cup</option>                                                                                                                      
+<option value='bottlecap'>bottlecap</option>                                                                                                          
+<option value='The_Great_Wall_of_China'>The_Great_Wall_of_China</option>                                                                              
+<option value='The_Mona_Lisa'>The_Mona_Lisa</option>                                                                                                  
+<option value='smiley_face'>smiley_face</option>                                                                                                      
+<option value='waterslide'>waterslide</option>                                                                                                        
+<option value='eyeglasses'>eyeglasses</option>                                                                                                        
+<option value='ceiling_fan'>ceiling_fan</option>                                                                                                      
+<option value='lobster'>lobster</option>                                                                                                              
+<option value='moustache'>moustache</option>                                                                                                          
+<option value='carrot'>carrot</option>                                                                                                                
+<option value='garden'>garden</option>                                                                                                                
+<option value='police_car'>police_car</option>                                                                                                        
+<option value='postcard'>postcard</option>                                                                                                            
+<option value='necklace'>necklace</option>                                                                                                            
+<option value='helmet'>helmet</option>                                                                                                                
+<option value='blackberry'>blackberry</option>                                                                                                        
+<option value='beach'>beach</option>                                                                                                                  
+<option value='golf_club'>golf_club</option>                                                                                                          
+<option value='car'>car</option>                                                                                                                      
+<option value='panda'>panda</option>                                                                                                                  
+<option value='alarm_clock'>alarm_clock</option>                                                                                                      
+<option value='t-shirt'>t-shirt</option>                                                                                                              
+<option value='dog'>dog</option>                                                                                                                      
+<option value='bread'>bread</option>                                                                                                                  
+<option value='wine_glass'>wine_glass</option>                                                                                                        
+<option value='lighter'>lighter</option>                                                                                                              
+<option value='flower'>flower</option>                                                                                                                
+<option value='bandage'>bandage</option>                                                                                                              
+<option value='drill'>drill</option>                                                                                                                  
+<option value='butterfly'>butterfly</option>                                                                                                          
+<option value='swan'>swan</option>                                                                                                                    
+<option value='owl'>owl</option>                                                                                                                      
+<option value='raccoon'>raccoon</option>                                                                                                              
+<option value='squiggle'>squiggle</option>                                                                                                            
+<option value='calendar'>calendar</option>                                                                                                            
+<option value='giraffe'>giraffe</option>                                                                                                              
+<option value='elephant'>elephant</option>                                                                                                            
+<option value='trumpet'>trumpet</option>                                                                                                              
+<option value='rabbit'>rabbit</option>                                                                                                                
+<option value='trombone'>trombone</option>                                                                                                            
+<option value='sheep'>sheep</option>                                                                                                                  
+<option value='onion'>onion</option>                                                                                                                  
+<option value='church'>church</option>                                                                                                                
+<option value='flip_flops'>flip_flops</option>                                                                                                        
+<option value='spreadsheet'>spreadsheet</option>                                                                                                      
+<option value='pear'>pear</option>                                                                                                                    
+<option value='clock'>clock</option>                                                                                                                  
+<option value='roller_coaster'>roller_coaster</option>                                                                                                
+<option value='parachute'>parachute</option>                                                                                                          
+<option value='kangaroo'>kangaroo</option>                                                                                                            
+<option value='duck'>duck</option>                                                                                                                    
+<option value='remote_control'>remote_control</option>                                                                                                
+<option value='compass'>compass</option>                                                                                                              
+<option value='monkey'>monkey</option>                                                                                                                
+<option value='rainbow'>rainbow</option>                                                                                                              
+<option value='tennis_racquet'>tennis_racquet</option>                                                                                                
+<option value='lion'>lion</option>                                                                                                                    
+<option value='pencil'>pencil</option>                                                                                                                
+<option value='string_bean'>string_bean</option>                                                                                                      
+<option value='oven'>oven</option>                                                                                                                    
+<option value='star'>star</option>                                                                                                                    
+<option value='cat'>cat</option>                                                                                                                      
+<option value='pizza'>pizza</option>                                                                                                                  
+<option value='soccer_ball'>soccer_ball</option>                                                                                                      
+<option value='syringe'>syringe</option>                                                                                                              
+<option value='flying_saucer'>flying_saucer</option>                                                                                                  
+<option value='eye'>eye</option>                                                                                                                      
+<option value='cookie'>cookie</option>                                                                                                                
+<option value='floor_lamp'>floor_lamp</option>                                                                                                        
+<option value='mouse'>mouse</option>                                                                                                                  
+<option value='toilet'>toilet</option>                                                                                                                
+<option value='toaster'>toaster</option>                                                                                                              
+<option value='The_Eiffel_Tower'>The_Eiffel_Tower</option>                                                                                            
+<option value='airplane'>airplane</option>                                                                                                            
+<option value='stove'>stove</option>                                                                                                                  
+<option value='cello'>cello</option>                                                                                                                  
+<option value='stop_sign'>stop_sign</option>                                                                                                          
+<option value='tent'>tent</option>                                                                                                                    
+<option value='diving_board'>diving_board</option>                                                                                                    
+<option value='light_bulb'>light_bulb</option>                                                                                                        
+<option value='hammer'>hammer</option>                                                                                                                
+<option value='scorpion'>scorpion</option>                                                                                                            
+<option value='headphones'>headphones</option>                                                                                                        
+<option value='basket'>basket</option>                                                                                                                
+<option value='spider'>spider</option>                                                                                                                
+<option value='paper_clip'>paper_clip</option>                                                                                                        
+<option value='sweater'>sweater</option>                                                                                                              
+<option value='ice_cream'>ice_cream</option>                                                                                                          
+<option value='envelope'>envelope</option>                                                                                                            
+<option value='sea_turtle'>sea_turtle</option>                                                                                                        
+<option value='donut'>donut</option>                                                                                                                  
+<option value='hat'>hat</option>                                                                                                                      
+<option value='hourglass'>hourglass</option>                                                                                                          
+<option value='broccoli'>broccoli</option>                                                                                                            
+<option value='jacket'>jacket</option>                                                                                                                
+<option value='backpack'>backpack</option>                                                                                                            
+<option value='book'>book</option>                                                                                                                    
+<option value='lightning'>lightning</option>                                                                                                          
+<option value='drums'>drums</option>                                                                                                                  
+<option value='snowflake'>snowflake</option>                                                                                                          
+<option value='radio'>radio</option>                                                                                                                  
+<option value='banana'>banana</option>                                                                                                                
+<option value='camel'>camel</option>                                                                                                                  
+<option value='canoe'>canoe</option>                                                                                                                  
+<option value='toothpaste'>toothpaste</option>                                                                                                        
+<option value='chair'>chair</option>                                                                                                                  
+<option value='picture_frame'>picture_frame</option>                                                                                                  
+<option value='parrot'>parrot</option>                                                                                                                
+<option value='sandwich'>sandwich</option>                                                                                                            
+<option value='lipstick'>lipstick</option>                                                                                                            
+<option value='pants'>pants</option>                                                                                                                  
+<option value='violin'>violin</option>                                                                                                                
+<option value='brain'>brain</option>                                                                                                                  
+<option value='power_outlet'>power_outlet</option>                                                                                                    
+<option value='triangle'>triangle</option>                                                                                                            
+<option value='hamburger'>hamburger</option>                                                                                                          
+<option value='dragon'>dragon</option>                                                                                                                
+<option value='bulldozer'>bulldozer</option>                                                                                                          
+<option value='cannon'>cannon</option>                                                                                                                
+<option value='dolphin'>dolphin</option>                                                                                                              
+<option value='zebra'>zebra</option>                                                                                                                  
+<option value='animal_migration'>animal_migration</option>                                                                                            
+<option value='camouflage'>camouflage</option>                                                                                                        
+<option value='scissors'>scissors</option>                                                                                                            
+<option value='basketball'>basketball</option>                                                                                                        
+<option value='elbow'>elbow</option>                                                                                                                  
+<option value='umbrella'>umbrella</option>                                                                                                            
+<option value='windmill'>windmill</option>                                                                                                            
+<option value='table'>table</option>                                                                                                                  
+<option value='rifle'>rifle</option>                                                                                                                  
+<option value='hexagon'>hexagon</option>                                                                                                              
+<option value='potato'>potato</option>                                                                                                                
+<option value='anvil'>anvil</option>                                                                                                                  
+<option value='sword'>sword</option>                                                                                                                  
+<option value='peanut'>peanut</option>                                                                                                                
+<option value='axe'>axe</option>                                                                                                                      
+<option value='television'>television</option>                                                                                                        
+<option value='rhinoceros'>rhinoceros</option>                                                                                                        
+<option value='baseball_bat'>baseball_bat</option>                                                                                                    
+<option value='speedboat'>speedboat</option>                                                                                                          
+<option value='sailboat'>sailboat</option>                                                                                                            
+<option value='zigzag'>zigzag</option>                                                                                                                
+<option value='garden_hose'>garden_hose</option>                                                                                                      
+<option value='river'>river</option>                                                                                                                  
+<option value='house'>house</option>                                                                                                                  
+<option value='pillow'>pillow</option>                                                                                                                
+<option value='ant'>ant</option>                                                                                                                      
+<option value='tiger'>tiger</option>                                                                                                                  
+<option value='stairs'>stairs</option>                                                                                                                
+<option value='cooler'>cooler</option>                                                                                                                
+<option value='see_saw'>see_saw</option>                                                                                                              
+<option value='piano'>piano</option>                                                                                                                  
+<option value='fireplace'>fireplace</option>                                                                                                          
+<option value='popsicle'>popsicle</option>                                                                                                            
+<option value='dumbbell'>dumbbell</option>                                                                                                            
+<option value='mailbox'>mailbox</option>                                                                                                              
+<option value='barn'>barn</option>                                                                                                                    
+<option value='hot_tub'>hot_tub</option>                                                                                                              
+<option value='teddy-bear'>teddy-bear</option>                                                                                                        
+<option value='fork'>fork</option>                                                                                                                    
+<option value='dishwasher'>dishwasher</option>                                                                                                        
+<option value='peas'>peas</option>                                                                                                                    
+<option value='hot_air_balloon'>hot_air_balloon</option>                                                                                              
+<option value='keyboard'>keyboard</option>                                                                                                            
+<option value='microwave'>microwave</option>                                                                                                          
+<option value='wheel'>wheel</option>                                                                                                                  
+<option value='fire_hydrant'>fire_hydrant</option>                                                                                                    
+<option value='van'>van</option>                                                                                                                      
+<option value='camera'>camera</option>                                                                                                                
+<option value='whale'>whale</option>                                                                                                                  
+<option value='candle'>candle</option>                                                                                                                
+<option value='octopus'>octopus</option>                                                                                                              
+<option value='pig'>pig</option>                                                                                                                      
+<option value='swing_set'>swing_set</option>                                                                                                          
+<option value='helicopter'>helicopter</option>                                                                                                        
+<option value='saxophone'>saxophone</option>                                                                                                          
+<option value='passport'>passport</option>                                                                                                            
+<option value='bat'>bat</option>                                                                                                                      
+<option value='ambulance'>ambulance</option>                                                                                                          
+<option value='diamond'>diamond</option>                                                                                                              
+<option value='goatee'>goatee</option>                                                                                                                
+<option value='fence'>fence</option>                                                                                                                  
+<option value='grass'>grass</option>                                                                                                                  
+<option value='mermaid'>mermaid</option>                                                                                                              
+<option value='motorbike'>motorbike</option>                                                                                                          
+<option value='microphone'>microphone</option>                                                                                                        
+<option value='toe'>toe</option>                                                                                                                      
+<option value='cactus'>cactus</option>                                                                                                                
+<option value='nail'>nail</option>                                                                                                                    
+<option value='telephone'>telephone</option>                                                                                                          
+<option value='hand'>hand</option>                                                                                                                    
+<option value='squirrel'>squirrel</option>                                                                                                            
+<option value='streetlight'>streetlight</option>                                                                                                      
+<option value='bed'>bed</option>                                                          
+<option value='firetruck'>firetruck</option>
+ </select>
+ </div>
+    <div class="form-group">
+
+     <input type="submit" name="submit" value="Submit" id="btn" />
+    </div>
+   </form>
+   <h3>A list of object it can guess: (345 objects) </h3>
+   <p>
+    aircraft carrier
+    , airplane
+    , alarm clock
+    , ambulance
+    , angel
+    , animal migration
+    , ant
+    , anvil
+    , apple
+    , arm
+    , asparagus
+    , axe
+    , backpack
+    , banana
+    , bandage
+    , barn
+    , baseball
+    , baseball bat
+    , basket
+    , basketball
+    , bat
+    , bathtub
+    , beach
+    , bear
+    , beard
+    , bed
+    , bee
+    , belt
+    , bench
+    , bicycle
+    , binoculars
+    , bird
+    , birthday cake
+    , blackberry
+    , blueberry
+    , book
+    , boomerang
+    , bottlecap
+    , bowtie
+    , bracelet
+    , brain
+    , bread
+    , bridge
+    , broccoli
+    , broom
+    , bucket
+    , bulldozer
+    , bus
+    , bush
+    , butterfly
+    , cactus
+    , cake
+    , calculator
+    , calendar
+    , camel
+    , camera
+    , camouflage
+    , campfire
+    , candle
+    , cannon
+    , canoe
+    , car
+    , carrot
+    , castle
+    , cat
+    , ceiling fan
+    , cello
+    , cell phone
+    , chair
+    , chandelier
+    , church
+    , circle
+    , clarinet
+    , clock
+    , cloud
+    , coffee cup
+    , compass
+    , computer
+    , cookie
+    , cooler
+    , couch
+    , cow
+    , crab
+    , crayon
+    , crocodile
+    , crown
+    , cruise ship
+    , cup
+    , diamond
+    , dishwasher
+    , diving board
+    , dog
+    , dolphin
+    , donut
+    , door
+    , dragon
+    , dresser
+    , drill
+    , drums
+    , duck
+    , dumbbell
+    , ear
+    , elbow
+    , elephant
+    , envelope
+    , eraser
+    , eye
+    , eyeglasses
+    , face
+    , fan
+    , feather
+    , fence
+    , finger
+    , fire hydrant
+    , fireplace
+    , firetruck
+    , fish
+    , flamingo
+    , flashlight
+    , flip flops
+    , floor lamp
+    , flower
+    , flying saucer
+    , foot
+    , fork
+    , frog
+    , frying pan
+    , garden
+    , garden hose
+    , giraffe
+    , goatee
+    , golf club
+    , grapes
+    , grass
+    , guitar
+    , hamburger
+    , hammer
+    , hand
+    , harp
+    , hat
+    , headphones
+    , hedgehog
+    , helicopter
+    , helmet
+    , hexagon
+    , hockey puck
+    , hockey stick
+    , horse
+    , hospital
+    , hot air balloon
+    , hot dog
+    , hot tub
+    , hourglass
+    , house
+    , house plant
+    , hurricane
+    , ice cream
+    , jacket
+    , jail
+    , kangaroo
+    , key
+    , keyboard
+    , knee
+    , knife
+    , ladder
+    , lantern
+    , laptop
+    , leaf
+    , leg
+    , light bulb
+    , lighter
+    , lighthouse
+    , lightning
+    , line
+    , lion
+    , lipstick
+    , lobster
+    , lollipop
+    , mailbox
+    , map
+    , marker
+    , matches
+    , megaphone
+    , mermaid
+    , microphone
+    , microwave
+    , monkey
+    , moon
+    , mosquito
+    , motorbike
+    , mountain
+    , mouse
+    , moustache
+    , mouth
+    , mug
+    , mushroom
+    , nail
+    , necklace
+    , nose
+    , ocean
+    , octagon
+    , octopus
+    , onion
+    , oven
+    , owl
+    , paintbrush
+    , paint can
+    , palm tree
+    , panda
+    , pants
+    , paper clip
+    , parachute
+    , parrot
+    , passport
+    , peanut
+    , pear
+    , peas
+    , pencil
+    , penguin
+    , piano
+    , pickup truck
+    , picture frame
+    , pig
+    , pillow
+    , pineapple
+    , pizza
+    , pliers
+    , police car
+    , pond
+    , pool
+    , popsicle
+    , postcard
+    , potato
+    , power outlet
+    , purse
+    , rabbit
+    , raccoon
+    , radio
+    , rain
+    , rainbow
+    , rake
+    , remote control
+    , rhinoceros
+    , rifle
+    , river
+    , roller coaster
+    , rollerskates
+    , sailboat
+    , sandwich
+    , saw
+    , saxophone
+    , school bus
+    , scissors
+    , scorpion
+    , screwdriver
+    , sea turtle
+    , see saw
+    , shark
+    , sheep
+    , shoe
+    , shorts
+    , shovel
+    , sink
+    , skateboard
+    , skull
+    , skyscraper
+    , sleeping bag
+    , smiley face
+    , snail
+    , snake
+    , snorkel
+    , snowflake
+    , snowman
+    , soccer ball
+    , sock
+    , speedboat
+    , spider
+    , spoon
+    , spreadsheet
+    , square
+    , squiggle
+    , squirrel
+    , stairs
+    , star
+    , steak
+    , stereo
+    , stethoscope
+    , stitches
+    , stop sign
+    , stove
+    , strawberry
+    , streetlight
+    , string bean
+    , submarine
+    , suitcase
+    , sun
+    , swan
+    , sweater
+    , swing set
+    , sword
+    , syringe
+    , table
+    , teapot
+    , teddy-bear
+    , telephone
+    , television
+    , tennis racquet
+    , tent
+    , The Eiffel Tower
+    , The Great Wall of China
+    , The Mona Lisa
+    , tiger
+    , toaster
+    , toe
+    , toilet
+    , tooth
+    , toothbrush
+    , toothpaste
+    , tornado
+    , tractor
+    , traffic light
+    , train
+    , tree
+    , triangle
+    , trombone
+    , truck
+    , trumpet
+    , t-shirt
+    , umbrella
+    , underwear
+    , van
+    , vase
+    , violin
+    , washing machine
+    , watermelon
+    , waterslide
+    , whale
+    , wheel
+    , windmill
+    , wine bottle
+    , wine glass
+    , wristwatch
+    , yoga
+    , zebra
+    , zigzag
+  </p>
+    
+      
+ 
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+
+<script>
+$(document).ready(function(){
+ $('#framework').multiselect({
+  nonSelectedText: 'Select ',
+  enableFiltering: true,
+  enableCaseInsensitiveFiltering: true,
+  maxHeight: 300,
+  buttonWidth:'400px'
+ });
+ 
+ 
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>create quiz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+body {
+  background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.wrapper {
+  width: 600px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+}
+
+.controls {
+  width: 294px;
+  margin: 15px auto;
+}
+
+hr{
+  color: #fa4299;
+  background-color: #fa4299;
+  border-top: 2px solid #F4069D;
+}
+
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  color: #ffff;
+}
+  </style>
+  <!-- include font awesome -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+  <h1>Create Quiz</h1>
+  <div class="wrapper">
+    
+      <form method="POST" action="/create/coinscrapper">
+        <div id="survey_options">
+          <div class="mb-3">
+            <label for="topic" class="form-label">Topic</label>
+            <input type="text" class="form-control" id="topic" name="topic" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">Enter the topic for the game.</div>
+          </div>
+          <div class="mb-3" id="add_here">
+            <label for="question" class="form-label">Question 1</label>
+            <input type="text" class="form-control" id="question" name="question">
+            <label for="answer" class="form-label">Answer 1</label>
+            <input type="text" class="form-control" id="answer" name="answer">
+          </div>
+      </div>
+        <div class="controls">
+        <a id="add_more_fields"><button type="button" class="btn btn-success" style="margin: 10px;"><i class="fa fa-plus"></i> Add More</button></a>
+        <a id="remove_fields"><button type="button" class="btn btn-danger" style="margin: 10px;" ><i class="fa fa-minus" ></i> Remove</button></a>
+      </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #DA1C75;border: none;">Submit</button>
+      </form>
+ 
+  </div>
+<script>
+  var survey_options = document.getElementById('survey_options');
+  var add_here = document.getElementById('add_here');
+var add_more_fields = document.getElementById('add_more_fields');
+var remove_fields = document.getElementById('remove_fields');
+var c = 1;
+
+
+add_more_fields.onclick = function(){
+  c+=1;
+  var myhr = document.createElement('hr');
+  add_here.appendChild(myhr);
+
+
+  var newlabel = document.createElement('label');
+  newlabel.setAttribute('for','question'+ c);
+  newlabel.setAttribute('class','form-label');
+  newlabel.innerHTML = "Question "+ c;
+  add_here.appendChild(newlabel);
+
+  var newField = document.createElement('input');
+  newField.setAttribute('type','text');
+  newField.setAttribute('name','question');
+  newField.setAttribute('class','form-control');
+  newField.setAttribute('placeholder','');
+  add_here.appendChild(newField);
+
+  var newlabel = document.createElement('label');
+  newlabel.setAttribute('for','answer');
+  newlabel.setAttribute('class','form-label');
+  newlabel.innerHTML = "Answer "+ c;
+  add_here.appendChild(newlabel);
+
+  var newField = document.createElement('input');
+  newField.setAttribute('type','text');
+  newField.setAttribute('name','answer');
+  newField.setAttribute('class','form-control');
+  newField.setAttribute('placeholder','');
+  add_here.appendChild(newField);
+}
+
+remove_fields.onclick = function(){
+  var input_tags = add_here.getElementsByTagName('input');
+  var label_tags = add_here.getElementsByTagName('label');
+  var hr_tags = add_here.getElementsByTagName('hr');
+
+  if(input_tags.length > 2 && label_tags.length >2) {
+    c-=1;
+
+    add_here.removeChild(input_tags[(input_tags.length) - 1]);
+    add_here.removeChild(label_tags[(label_tags.length) - 1]);
+
+    add_here.removeChild(input_tags[(input_tags.length) - 1]);
+    add_here.removeChild(label_tags[(label_tags.length) - 1]);
+
+    add_here.removeChild(hr_tags[(hr_tags.length) - 1]);
+  }
+}
+</script>
+</body>
+</html>
