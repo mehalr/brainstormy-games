@@ -7,7 +7,7 @@ Node.js P5.js Tensorflow MongoDb.
 
 
 
-## ScreenShots
+## Screenshots
 
 ![image](https://user-images.githubusercontent.com/80697977/139535657-578f5d8d-d11c-4515-8460-e922f0ce85ab.png)
 
