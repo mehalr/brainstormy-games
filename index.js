@@ -292,6 +292,8 @@ app.post('/student/educational-games',async(req,res)=>{
         res.redirect('/space')
     }else if (quiz.game == 'dinosaur adventures'){
         res.redirect('/dino')
+    }else if (quiz.game == 'doodle fun'){
+        res.redirect('/doodle')
     }
 });
 
