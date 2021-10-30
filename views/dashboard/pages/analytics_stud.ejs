@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <title>
-    Teacher Dashboard
+    Student Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  " href="/teacher/dashboard">
+          <a class="nav-link  " href="/student/dashboard">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -55,7 +55,7 @@
           </a>
         </li>
        <li class="nav-item">
-          <a class="nav-link active" href="/teacher/analytics">
+          <a class="nav-link active" href="/student/analytics">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -75,7 +75,7 @@
           </a>
         </li>
          <li class="nav-item">
-          <a class="nav-link  " href="/teacher/educational-games">
+          <a class="nav-link  " href="/student/educational-games">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>box-3d-50</title>
@@ -116,7 +116,7 @@
           </a>
         </li>
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Teacher Dashboard</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Student Dashboard</h6>
         </li>
         
       </ul>
@@ -253,6 +253,8 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-10">Game</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">Topic</th>
+                      <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">Teacher</th>
                       <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">Code</th>
                       <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-10">Score</th>
                       <th class="text-secondary opacity-10"></th>
@@ -268,10 +270,16 @@
                               <img src="/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                             </div>
                             <div class="d-flex flex-column justify-content-center">
-                              <h6 class="mb-0 text-sm"><%= quiz[i].player_name %></h6>
+                              <h6 class="mb-0 text-sm"><%= quiz[i].game_name %></h6>
                               <!-- <p class="text-xs text-secondary mb-0">john@creative-tim.com</p> -->
                             </div>
                           </div>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success"><%= quiz[i].game_topic %></span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success"><%= quiz[i].teacher_name %></span>
                         </td>
                         <td class="align-middle text-center text-sm">
                           <span class="badge badge-sm bg-gradient-success"><%= quiz[i].game_id %></span>
@@ -279,11 +287,7 @@
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><%= quiz[i].score %></span>
                         </td>
-                        <td class="align-middle">
-                          <a href="/leaderboard/<%= quiz[i].code %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                            View Leaderboard
-                          </a>
-                        </td>
+                        
                       </tr>
 
                   <% } %>
