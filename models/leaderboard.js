@@ -22,6 +22,21 @@ const ResultSchema = new mongoose.Schema({
       required: true
     },
 
+    game_name : {
+      type: String,
+      required: true
+    },
+
+    teacher_name : {
+      type: String,
+      required: true
+    },
+    game_topic : {
+      type: String,
+      required: true
+
+    }
+
 })
 
 

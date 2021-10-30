@@ -49,8 +49,15 @@ function guess() {
   const sortProb = rawProbWIndex.sort((a, b) => b.probability - a.probability);
   const topKClassWIndex = sortProb.slice(0, k);
   const topKRes = topKClassWIndex.map(i => `<br>${CLASSES[i.index]} (${(i.probability.toFixed(2) * 100)}%)`);
+  const p = topKClassWIndex.map(i => `${CLASSES[i.index]}`);
   select('#res').html(`I see: ${topKRes.toString()}`);
+
+  select('#try').html(p);
 }
+
+
+
+
 
 function getInputImage() {
   let inputs = [];

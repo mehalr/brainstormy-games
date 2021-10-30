@@ -54,7 +54,7 @@
 
     #grid {
       display: flex;
-      margin-left: 470px;
+      margin-left: 530px;
       /*justify-content: center;*/
     }
 
@@ -66,12 +66,21 @@
 
 <body>
   <h1>Doodle Fun</h1>
+
+   <div id="gameover" style="display: none;
+    margin-left: auto;
+    margin-right: auto; background-color: yellow;text-align: center;">
+    <h1 >GAME OVER</h1>
+    <h2>Score: <span id="score"></span></h2>
+    <a href="/student/dashboard"><button class="btn btn-primary" style="margin: 10px;">Back to dashboard</button></a>
+  </div>
+
   
-  <h4>Draw a <span id="question"></span> !</h4>
+  <h4 id="draw">Draw <span id="question"></span> !</h4>
   <div id="start">
   <button type="button" class="btn btn-success" id="guess">Guess</button>
   <button type="button" class="btn btn-warning" id="clear">Clear</button>
-  <button type="button" class="btn btn-info" id="next">Next</button>
+  <button type="button" class="btn btn-info" id="next" onclick="Answer();displayQues()"/>Next</button>
 </div>
   <!-- <button id="guess">guess</button>
   <button id="clear">clear</button> -->
@@ -81,21 +90,95 @@
     
   </div>
 
+  <p id="try" style="display: none">hello</p>
+
  
 </body>
 <script type="text/javascript">
+
+
 
     var trial = <%= trial %>;
     console.log(trial);
     if ( trial == false){
         var questions =  <%-JSON.stringify(question) %>;
     }else{
-      var questions = ['strawberry','sun','traffic light','octopus'];
+      var questions = ['strawberry','sun','traffic_light','octopus'];
       
     } 
 
-document.getElementById("next").addEventListener("click", displayQues);
+
+
+// document.getElementById("next").addEventListener("click", displayQues ,Answer);
 var count = 0;
+var score = 0;
+
+function gameover(){
+  // dino_count += 1;
+  // console.log(dino_count);
+  var gameover = document.getElementById("gameover");
+  gameover.style.display = "block";
+  var draw = document.getElementById("draw");
+  draw.style.display = "none";
+  document.getElementById("score").innerHTML = score;
+  
+  var code = <%= code %>
+  code = code.toString();
+  console.log(code);
+  submitscore(score, code);
+
+
+  // if (dino_count == 1){
+  //   score = document.getElementById('scoreSpan').innerHTML
+  //   code = code.toString();
+  //   console.log(code);
+  //   submitscore(score, code);
+  // }
+}
+
+function submitscore(score, game_id){
+  payload = {score, game_id}
+  options = {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  };
+  fetch('/check/',options);
+}
+
+
+function Answer(){
+  var answer = document.getElementById('try').innerHTML;
+  console.log(answer);
+  answer = answer.split(',');
+  console.log(questions[count-1]);
+  var index = answer.indexOf(questions[count-1]);
+  console.log(questions[count-1]);
+  console.log(index);
+  console.log(questions.length);
+  console.log(count);
+  if (index!=-1){
+    score += (10-index);
+    if (count>=questions.length){
+      console.log(score);
+      gameover();
+    }
+  }else{
+    if (count>=questions.length){
+      console.log(score);
+      gameover();
+
+    }
+  }
+
+}
+
+
+
+
+
 
 function displayQues(){
   document.getElementById("question").innerHTML = questions[count];

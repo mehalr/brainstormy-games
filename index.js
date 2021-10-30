@@ -305,9 +305,19 @@ app.get('/teacher/educational-games',(req,res)=>{
 //analytics
 //-----------------------------------------------
 app.get('/teacher/analytics',async(req,res)=>{
-  const quiz = await Quiz.find({});
+    const teacher = await User.findById(req.session.user_id)
+    const quiz = await Quiz.find({teacher: teacher.name});
+
     res.render('analytics.ejs', {quiz});
 });
+
+app.get('/student/analytics',async(req,res)=>{
+    const student = await User.findById(req.session.user_id)
+    const quiz = await Result.find({player_name : student.name});
+
+    res.render('analytics_stud.ejs', {quiz});
+});
+
 
 //--------------------------------------------
 //save score
@@ -322,6 +332,9 @@ app.post('/check', async(req,res) => {
     player_id: req.session.user_id,
     score,
     player_name: player.name,
+    teacher_name : quiz.teacher,
+    game_name : quiz.game,
+    game_topic : quiz.topic
   });
   result.save();
 })
