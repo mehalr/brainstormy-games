@@ -14,13 +14,24 @@
 
 </head>
  <style type="text/css">
+   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
  	body {
+      font-family: 'Poppins', sans-serif;
       width: 100%;
       overflow: hidden;
       background-color: #000;
       background-size: cover;
     }
+
+    .wrapper {
+  width: 1000px;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+}
     #board {
       position: relative;
       width: 800px;
@@ -110,11 +121,19 @@
  </style>
 <body>
 
-<div class="card" style="background-image: linear-gradient(#e86ed0,#b1e8ed);">
+  <div class="wrapper">
+  <div class="card-body" id="question" style="padding: 0" >
+
+  </div>
+
+    
+  </div>
+
+<!-- <div class="card" style="background-image: linear-gradient(#e86ed0,#b1e8ed);">
   <div class="card-body" id="question" style="padding: 0">
 
   </div>
-</div>
+</div> -->
 
 	<div id="board">
 
@@ -174,75 +193,6 @@ options  = ["Random Access Memory","Randomely Access Memory","Run Accept Memory"
 }
 
 
-
-// var questions = [
-//   {
-//     id: 1,
-//     question: "What is the full form of RAM ?",
-//     answer: "Random Access Memory",
-//     options: [
-//       "Random Access Memory",
-//       "Randomely Access Memory",
-//       "Run Accept Memory",
-//       "None of these"
-//     ]
-//   },
-//   {
-//     id: 2,
-//     question: "The ALU makes use of what to store intermediate results?",
-//     answer: "Accumulators",
-//     options: [
-//       "Registers",
-//       "Accumulators",
-//       "Stack",
-//       "Heap"
-//     ]
-//   },
-//   {
-//     id: 3,
-//     question: "How many layers are present in the TCP/IP model?",
-//     answer: "5",
-//     options: [
-//       "10",
-//       "7",
-//       "5",
-//       "None of these"
-//     ]
-//   },
-//   {
-//     id: 4,
-//     question: "Physical or logical arrangement of network is called?",
-//     answer: "Topology",
-//     options: [
-//       "Topology",
-//       "Routing",
-//       "Networking",
-//       "Control"
-//     ]
-//   },
-//   {
-//     id: 5,
-//     question: "Key used to represent relationships between tables is called?",
-//     answer: "Topology",
-//     options: [
-//       "Secondary Key",
-//       "Primary Key",
-//       "Foreign Key",
-//       "None of these"
-//     ]
-//   },
-//   {
-//     id: 6,
-//     question: "The time it takes for microprocessor to fetch and execute a complete instruction is?",
-//     answer: "Instruction cycle",
-//     options: [
-//       "Write cycles",
-//       "Timing cycle",
-//       "Machine cycle",
-//       "Instruction cycle"
-//     ]
-//   }
-// ];
 
 
 
@@ -383,6 +333,7 @@ function submitscore(score, game_id){
 
 var movealiens = setInterval(() => {
 
+
     for (var i = 0; i < colors.length; i++) {
       //Now I have to increase the top of each rock,so that the rocks can move downwards..
       var color = document.getElementById(colors[i]); //getting each rock
@@ -428,6 +379,7 @@ function aliens() {
 }
 
 function show() {
+
   let question = document.getElementById("question");
 
   if (questions[count]!=undefined){
