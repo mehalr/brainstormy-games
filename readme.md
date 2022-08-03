@@ -3,7 +3,10 @@ Brainstormy is an intuitive web application for making customizable educational 
 
 
 ## Tech Stack
-Node.js P5.js Tensorflow MongoDb.
+- Node.js 
+- JavaScript
+- MongoDb
+- HTML/CSS
 
 
 
