@@ -1,413 +1,385 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Space Invaders</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
- <script src="https://kit.fontawesome.com/3c35f8069e.js" crossorigin="anonymous"></script>
+    <head>
+        <title>Space Invaders</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/3c35f8069e.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.1/markdown-it.min.js" integrity="sha512-hW0KbtvDnXCHbh2UCNP/6R+oXxCKiOfm9ciuUekdGBCQF1+57bGqZAk3sAFir7PMQstyRW0UecsSc2HQotH2vg==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/default.min.css" integrity="sha512-kZqGbhf9JTB4bVJ0G8HCkqmaPcRgo88F0dneK30yku5Y/dep7CZfCnNml2Je/sY4lBoqoksXz4PtVXS4GHSUzQ==" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/kotlin.min.js" integrity="sha512-8aYTnyDstX39PHxorDD+6ROknf98Vqr5KTOjwRCl/442uAVKOpCJ5wY9I3VQ6y46rdDJKYBIglIfE2+GQk8U5Q==" crossorigin="anonymous"></script>
+    </head>
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+            background-size: cover;
+        }
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/11.0.1/markdown-it.min.js" integrity="sha512-hW0KbtvDnXCHbh2UCNP/6R+oXxCKiOfm9ciuUekdGBCQF1+57bGqZAk3sAFir7PMQstyRW0UecsSc2HQotH2vg==" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/default.min.css" integrity="sha512-kZqGbhf9JTB4bVJ0G8HCkqmaPcRgo88F0dneK30yku5Y/dep7CZfCnNml2Je/sY4lBoqoksXz4PtVXS4GHSUzQ==" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/kotlin.min.js" integrity="sha512-8aYTnyDstX39PHxorDD+6ROknf98Vqr5KTOjwRCl/442uAVKOpCJ5wY9I3VQ6y46rdDJKYBIglIfE2+GQk8U5Q==" crossorigin="anonymous"></script>
+        .wrapper {
+            width: 1000px;
+            margin: 10px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
+        }
+        #board {
+            position: relative;
+            width: 800px;
+            height: 525px;
+            margin: 7px auto;
+            border: 2px solid white;
+            background: url("/background.png");
+            overflow: hidden;
+        }
 
+        #player {
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            background: url("/player.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 45%;
+            bottom: 0px;
+        }
 
-</head>
- <style type="text/css">
-   @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+        .bullets {
+            position: absolute;
+            bottom: 40px;
+            left: 48%;
+            width: 32px;
+            height: 32px;
+            background: url("/bullet.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
- 	body {
-      font-family: 'Poppins', sans-serif;
-      width: 100%;
-      overflow: hidden;
-      background-color: #000;
-      background-size: cover;
-    }
+        #red {
+            position: absolute;
+            top: 0px;
+            left: 20px;
+            width: 90px;
+            height: 72px;
+            background: url("/red.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
-    .wrapper {
-  width: 1000px;
-  margin: 10px auto;
-  padding: 20px;
-  border-radius: 10px;
-  background: white;
-  box-shadow: 0px 10px 40px 0px rgba(47,47,47,.1);
-}
-    #board {
-      position: relative;
-      width: 800px;
-      height: 525px;
-      margin: 7px auto;
-      border: 2px solid white;
-      background: url("/background.png");
-      overflow: hidden;
-    }
+        #green {
+            position: absolute;
+            top: 0px;
+            left: 240px;
+            width: 90px;
+            height: 72px;
+            background: url("/green.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
-    #player {
-      position: absolute;
-      width: 64px;
-      height: 64px;
-      background: url("/player.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      left: 45%;
-      bottom: 0px;
-    }
+        #yellow {
+            position: absolute;
+            top: 0px;
+            left: 450px;
+            width: 90px;
+            height: 82px;
+            background: url("/yellow.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
-    .bullets {
-      position: absolute;
-      bottom: 40px;
-      left: 48%;
-      width: 32px;
-      height: 32px;
-      background: url("/bullet.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
+        #pink {
+            position: absolute;
+            top: 0px;
+            left: 680px;
+            width: 90px;
+            height: 72px;
+            background: url("/pink.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
 
-    #red {
-      position: absolute;
-      top: 0px;
-      left: 20px;
-      width: 90px;
-      height: 72px;
-      background: url("/red.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
+        #points {
+            position: absolute;
+            top: 0px;
+            margin: 40px;
+            opacity: 0.7;
+            font-size: 10em;
+            color: white;
+        }
+    </style>
+    <body>
+        <div class="wrapper">
+            <div class="card-body" id="question" style="padding: 0" >
+        
+            </div>     
+        </div>
 
-     #green {
-      position: absolute;
-      top: 0px;
-      left: 240px;
-      width: 90px;
-      height: 72px;
-      background: url("/green.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-      #yellow {
-      position: absolute;
-      top: 0px;
-      left: 450px;
-      width: 90px;
-      height: 82px;
-      background: url("/yellow.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-      #pink {
-      position: absolute;
-      top: 0px;
-      left: 680px;
-      width: 90px;
-      height: 72px;
-      background: url("/pink.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-    #points {
-      position: absolute;
-      top: 0px;
-      margin: 40px;
-      opacity: 0.7;
-      font-size: 10em;
-      color: white;
-    }
-
-
- </style>
-<body>
-
-  <div class="wrapper">
-  <div class="card-body" id="question" style="padding: 0" >
-
-  </div>
-
+	    <div id="board">
+            <div id="gameover" style="display: none;margin-left: auto;margin-right: auto; background-color: yellow;text-align: center;">
+                <h1 >GAME OVER</h1>
+                <a href="/student/educational-games"><button class="btn btn-primary" style="margin: 10px;">
+                    Back to dashboard</button>
+                </a>
+            </div>
     
-  </div>
+            <div id="red"></div>   
+            <div id="green"></div>
+            <div id="yellow"></div>
+            <div id="pink"></div>     
+            <div id="player"></div>
+        </div>
 
-<!-- <div class="card" style="background-image: linear-gradient(#e86ed0,#b1e8ed);">
-  <div class="card-body" id="question" style="padding: 0">
-
-  </div>
-</div> -->
-
-	<div id="board">
-
-    <div id="gameover" style="display: none;
-    margin-left: auto;
-    margin-right: auto; background-color: yellow;text-align: center;">
-    <h1 >GAME OVER</h1>
-    <a href="/student/educational-games"><button class="btn btn-primary" style="margin: 10px;">Back to dashboard</button></a>
-  </div>
-
-    <div id="red"></div>
-
-    <div id="green"></div>
-
-    <div id="yellow"></div>
-
-    <div id="pink"></div>
-
-   <div id="player"></div>
-  </div>
-
-  <div id="points">0</div>
+        <div id="points">0</div>
 
 
-</body>
-<script>
+    </body>
+    <script>
 
+        let player = document.getElementById("player");
+        let board = document.getElementById("board");
+        colors = ['red','green','yellow','pink'];
+        count = 0;
+        ans = null;
+        
+        let trial = <%= trial %>;
+        if ( trial == false){
+            let questions =  <%-JSON.stringify(question) %>;
+            let answers = <%-JSON.stringify(answer) %>;
+            let options = <%-JSON.stringify(option) %>;
+        }else{
+          let questions = ["What is the full form of RAM ?",
+            "The ALU makes use of what to store intermediate results?",
+            "How many layers are present in the TCP/IP model?",
+            "Physical or logical arrangement of network is called?",
+            "Key used to represent relationships between tables is called?"];
+        
+            let answers = ["Random Access Memory","Accumulators","5","Topology","Foreign Key","Instruction cycle",];
+            options  = ["Random Access Memory","Randomely Access Memory","Run Accept Memory","None of these",
+                  "Registers","Accumulators", "Stack", "Heap",
+                  "10","7","5", "None of these",
+                  "Topology","Routing","Networking","Control",
+                  "Secondary Key","Primary Key","Foreign Key","None of these",
+                  "Write cycles","Timing cycle","Machine cycle", "Instruction cycle"]
+        
+        }
+        
+        
+        
+        
+        
+        window.addEventListener("keydown", (e) => {
+          let left = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
+          if (e.key == "ArrowLeft" && left > 0) {
+            player.style.left = left - 10 + "px";
+          }
 
-
-var player = document.getElementById("player");
-var board = document.getElementById("board");
-colors = ['red','green','yellow','pink'];
-count = 0;
-ans = null;
-
-var trial = <%= trial %>;
-if ( trial == false){
-    var questions =  <%-JSON.stringify(question) %>;
-    var answers = <%-JSON.stringify(answer) %>;
-    var options = <%-JSON.stringify(option) %>;
-
-}else{
-  var questions = ["What is the full form of RAM ?",
-"The ALU makes use of what to store intermediate results?",
-"How many layers are present in the TCP/IP model?",
-"Physical or logical arrangement of network is called?",
-"Key used to represent relationships between tables is called?"];
-
-var answers = ["Random Access Memory","Accumulators","5","Topology","Foreign Key","Instruction cycle",];
-options  = ["Random Access Memory","Randomely Access Memory","Run Accept Memory","None of these",
-      "Registers","Accumulators", "Stack", "Heap",
-      "10","7","5", "None of these",
-      "Topology","Routing","Networking","Control",
-      "Secondary Key","Primary Key","Foreign Key","None of these",
-      "Write cycles","Timing cycle","Machine cycle", "Instruction cycle"]
-
-}
-
-
-
-
-
-window.addEventListener("keydown", (e) => {
-  var left = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
-  if (e.key == "ArrowLeft" && left > 0) {
-    player.style.left = left - 10 + "px";
-  }
-  //460  =>  board width - player width
-  else if (e.key == "ArrowRight" && left <= 740) {
-    player.style.left = left + 10 + "px";
-  }
-
-  if (e.key == "ArrowUp" || e.keyCode == 32) {
-    //32 is for space key
-    var bullet = document.createElement("div");
-    bullet.classList.add("bullets");
-    board.appendChild(bullet);
-
-    var movebullet = setInterval(() => {
-
-      for(var i=0; i<colors.length ;i++){
-
-        var color = document.getElementById(colors[i]);
-
-        if (color!=null){
-           var colorbound = color.getBoundingClientRect();
-           var bulletbound = bullet.getBoundingClientRect();
-
-           if (
-                bulletbound.left >= colorbound.left &&
-                bulletbound.right <= colorbound.right &&
-                bulletbound.top <= colorbound.top &&
-                bulletbound.bottom <= colorbound.bottom
-              ) {
-                color.parentElement.removeChild(color); //Just removing that particular rock;
-                bullet.parentElement.removeChild(bullet);
-                if (i==0){
-                  console.log('Red hit');
-                  col = 'red';
-
-                }
-                else if (i==1){
-                  console.log('Green hit');
-                  col = 'green';
-
-                }
-                else if (i==2){
-                  console.log('Yellow hit');
-                  col = 'yellow';
-
-                }
-                else if (i==3){
-                  console.log('Pink hit');
-                  col = 'pink';
-                }
-
-                if (i==ans){
-                  console.log('right')
-                  document.getElementById("points").innerHTML =
-              parseInt(document.getElementById("points").innerHTML) + 10;
-                }else{
-                  console.log('wrong')
-                  document.getElementById("points").innerHTML =
-              parseInt(document.getElementById("points").innerHTML) - 5;
-                }
-                var co = document.createElement("div");
-                co.setAttribute("id", col);
-          board.appendChild(co);
-
-          count++;
-          show();
-
-                aliens();
-
+          else if (e.key == "ArrowRight" && left <= 740) {
+            player.style.left = left + 10 + "px";
+          }
+        
+          if (e.key == "ArrowUp" || e.keyCode == 32) {
+            //32 is for space key
+            let bullet = document.createElement("div");
+            bullet.classList.add("bullets");
+            board.appendChild(bullet);
+        
+            let movebullet = setInterval(() => {
+        
+              for(let i=0; i<colors.length ;i++){
+        
+                let color = document.getElementById(colors[i]);
+        
+                if (color!=null){
+                   let colorbound = color.getBoundingClientRect();
+                   let bulletbound = bullet.getBoundingClientRect();
+        
+                   if (
+                        bulletbound.left >= colorbound.left &&
+                        bulletbound.right <= colorbound.right &&
+                        bulletbound.top <= colorbound.top &&
+                        bulletbound.bottom <= colorbound.bottom
+                      ) {
+                        color.parentElement.removeChild(color); //Just removing that particular rock;
+                        bullet.parentElement.removeChild(bullet);
+                        if (i==0){
+                          console.log('Red hit');
+                          col = 'red';
+        
+                        }
+                        else if (i==1){
+                          console.log('Green hit');
+                          col = 'green';
+        
+                        }
+                        else if (i==2){
+                          console.log('Yellow hit');
+                          col = 'yellow';
+        
+                        }
+                        else if (i==3){
+                          console.log('Pink hit');
+                          col = 'pink';
+                        }
+        
+                        if (i==ans){
+                            console.log('right')
+                            document.getElementById("points").innerHTML =
+                            parseInt(document.getElementById("points").innerHTML) + 10;
+                        }else{
+                          console.log('wrong')
+                          document.getElementById("points").innerHTML =
+                      parseInt(document.getElementById("points").innerHTML) - 5;
+                        }
+                        let co = document.createElement("div");
+                        co.setAttribute("id", col);
+                        board.appendChild(co);
+        
+                        count++;
+                        show();
+                        aliens();
+        
+                    }
+        
+                 }
+        
+              }
+        
+        
+                let bulletbottom = parseInt(
+                window.getComputedStyle(bullet).getPropertyValue("bottom")
+              );
+        
+        
+        
+        
+              //Stops the bullet from moving outside the gamebox
+              if (bulletbottom >= 550) {
+                clearInterval(movebullet);
+              }
+        
+              bullet.style.left = left + "px"; //bullet should always be placed at the top of my jet..!
+              bullet.style.bottom = bulletbottom + 3 + "px";
+            });
+          }
+        
+        
+        });
+        
+        let over_count = 0;
+        
+        function gameover(){
+          over_count+=1 ;
+        
+          if (over_count==1){
+            console.log('Submitted!');
+                score = document.getElementById('points').innerHTML
+                let code = <%= code %>
+                code = code.toString();
+                console.log(code);
+                submitscore(score, code);
+          }
+        
+          let gameover = document.getElementById("gameover");
+          gameover.style.display = "block";
+        
+        }
+        
+        
+        function submitscore(score, game_id){
+            payload = {score, game_id}
+            options = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+            fetch('/check/',options);
+        }
+        
+        
+        
+        
+        
+        let movealiens = setInterval(() => {
+        
+        
+            for (let i = 0; i < colors.length; i++) {
+              let color = document.getElementById(colors[i]); //getting each rock
+        
+              if (color!=null){
+                 let colortop = parseInt(
+                window.getComputedStyle(color).getPropertyValue("top")
+              );
+              //475 => boardheight - rockheight + 25
+              if (colortop == 475) {
+                let gameOver = true;
+        
+                clearInterval(movealiens);
+                gameover();
+                // window.location.reload();
+              }
+        
+              color.style.top = colortop + 25 + "px";
+        
+              }
+        
             }
-
-         }
-
-      }
-
-
-        var bulletbottom = parseInt(
-        window.getComputedStyle(bullet).getPropertyValue("bottom")
-      );
-
-
-
-
-      //Stops the bullet from moving outside the gamebox
-      if (bulletbottom >= 550) {
-        clearInterval(movebullet);
-      }
-
-      bullet.style.left = left + "px"; //bullet should always be placed at the top of my jet..!
-      bullet.style.bottom = bulletbottom + 3 + "px";
-    });
-  }
-
-
-});
-
-var over_count = 0;
-
-function gameover(){
-  over_count+=1 ;
-
-  if (over_count==1){
-    console.log('Submitted!');
-		score = document.getElementById('points').innerHTML
-		var code = <%= code %>
-		code = code.toString();
-		console.log(code);
-		submitscore(score, code);
-  }
-
-  var gameover = document.getElementById("gameover");
-  gameover.style.display = "block";
-
-}
-
-
-function submitscore(score, game_id){
-	payload = {score, game_id}
-	options = {
-		method: 'post',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(payload)
-	};
-	fetch('/check/',options);
-}
-
-
-
-
-
-var movealiens = setInterval(() => {
-
-
-    for (var i = 0; i < colors.length; i++) {
-      //Now I have to increase the top of each rock,so that the rocks can move downwards..
-      var color = document.getElementById(colors[i]); //getting each rock
-
-      if (color!=null){
-         var colortop = parseInt(
-        window.getComputedStyle(color).getPropertyValue("top")
-      );
-      //475 => boardheight - rockheight + 25
-      if (colortop == 475) {
-        var gameOver = true;
-
-        clearInterval(movealiens);
-        gameover();
-        // window.location.reload();
-      }
-
-      color.style.top = colortop + 25 + "px";
-
-      }
-
-    }
-
-}, 1000);
-
-
-
-
-function aliens() {
-  // body...
-  for (var i = 0; i < colors.length; i++) {
-      //Now I have to increase the top of each rock,so that the rocks can move downwards..
-      var color = document.getElementById(colors[i]); //getting each rock
-
-      if (color!=null){
-
-      color.style.top = 0 + "px";
-
-      }
-
-    }
-
-}
-
-function show() {
-
-  let question = document.getElementById("question");
-
-  if (questions[count]!=undefined){
-
-    arr = options.slice(0,4);
-    options = options.slice(4);
-
-    ans = arr.indexOf(answers[count]);
-  let [first, second, third, fourth] = arr;
-
-
-  console.log(ans);
-
-  question.innerHTML = `
-   <h5 class="card-title">Q. ${count+1} ${questions[count]} </h5>
-    <p class="card-text"><i class="fas fa-rocket" style="color: red;"></i> ${first} &nbsp &nbsp
-    <i class="fas fa-rocket" style="color :#7EFB18"></i> ${second} &nbsp &nbsp
-    <i class="fas fa-rocket" style="color: yellow"></i> ${third} &nbsp &nbsp
-    <i class="fas fa-rocket" style=" color: #E621C9"></i> ${fourth}</p>
-  `;
-  }
-
-
-}
-
-window.onload = function() {
-  show();
-
-};
-</script>
+        
+        }, 1000);
+        
+        
+        
+        
+        function aliens() {
+          // body...
+          for (let i = 0; i < colors.length; i++) {
+              //Now I have to increase the top of each rock,so that the rocks can move downwards..
+              let color = document.getElementById(colors[i]); //getting each rock
+        
+              if (color!=null){
+        
+              color.style.top = 0 + "px";
+        
+              }
+        
+            }
+        
+        }
+        
+        function show() {
+        
+          let question = document.getElementById("question");
+        
+          if (questions[count]!=undefined){
+        
+            arr = options.slice(0,4);
+            options = options.slice(4);
+        
+            ans = arr.indexOf(answers[count]);
+          let [first, second, third, fourth] = arr;
+        
+        
+          console.log(ans);
+        
+          question.innerHTML = `
+           <h5 class="card-title">Q. ${count+1} ${questions[count]} </h5>
+            <p class="card-text"><i class="fas fa-rocket" style="color: red;"></i> ${first} &nbsp &nbsp
+            <i class="fas fa-rocket" style="color :#7EFB18"></i> ${second} &nbsp &nbsp
+            <i class="fas fa-rocket" style="color: yellow"></i> ${third} &nbsp &nbsp
+            <i class="fas fa-rocket" style=" color: #E621C9"></i> ${fourth}</p>
+          `;
+          }
+        }
+        
+        window.onload = function() {
+          show();
+        };
+    </script>
 </html>
