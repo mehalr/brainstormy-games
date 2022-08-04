@@ -10,7 +10,7 @@ const session = require('express-session');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({ secret: 'notagoodsecret' }))
+app.use(session({ secret: 'sessionlet' }))
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.static(path.join(__dirname,'views/dashboard/assets')));
@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/loginDemo', { useNewUrlParser: true,
     .catch(err => {
         console.log("OH NO MONGO CONNECTION ERROR!!!!")
         console.log(err)
-    })
+    });
 
 //login required
 const requireLogin = (req, res, next) => {
@@ -104,7 +104,7 @@ app.get('/create/dino',(req,res)=>{
 
 app.post('/create/dino',async(req,res)=>{
     const {topic,question,answer} = req.body;
-    var gcode = Math.floor(100000 + Math.random() * 900000).toString();
+    let gcode = Math.floor(100000 + Math.random() * 900000).toString();
     const teacher = await User.findById(req.session.user_id);
     const quiz = new Quiz({
         topic ,
@@ -127,7 +127,7 @@ app.get('/create/coinscrapper',(req,res)=>{
 
 app.post('/create/coinscrapper',async(req,res)=>{
     const {topic,question,answer} = req.body;
-    var gcode = Math.floor(100000 + Math.random() * 900000).toString();
+    let gcode = Math.floor(100000 + Math.random() * 900000).toString();
     const teacher = await User.findById(req.session.user_id);
     const quiz = new Quiz({
         topic ,
@@ -152,10 +152,8 @@ app.get('/create/space',(req,res)=>{
 
 app.post('/create/space',async(req,res)=>{
     const {topic,question,option,answer} = req.body;
-    var gcode = Math.floor(100000 + Math.random() * 900000).toString();
-    console.log(req.session.user_id)
+    let gcode = Math.floor(100000 + Math.random() * 900000).toString();
     const teacher = await User.findById(req.session.user_id);
-    console.log(teacher);
     const quiz = new Quiz({
         topic ,
         game : 'space invaders',
@@ -178,7 +176,7 @@ app.post('/create/doodle',async(req,res)=>{
     console.log(question);
     const teacher = await User.findById(req.session.user_id);
     
-    var gcode = Math.floor(100000 + Math.random() * 900000).toString();
+    let gcode = Math.floor(100000 + Math.random() * 900000).toString();
     const quiz = new Quiz({ 
         topic : 'Doodle for Fun',
         game : 'Doodle Fun',
@@ -202,7 +200,7 @@ app.get('/create/doodle',(req,res)=>{
 //dino
 
 app.get('/dino',async(req,res)=>{
-    var code = req.session.gamecode;
+    let code = req.session.gamecode;
     if (code != null){
         req.session.gamecode = null;
         const quiz = await Quiz.findOne({ code });
@@ -217,7 +215,7 @@ app.get('/dino',async(req,res)=>{
 //space
 
 app.get('/space',async(req,res)=>{
-	var code = req.session.gamecode;
+	let code = req.session.gamecode;
     if (code != null){
         req.session.gamecode = null;
         const quiz = await Quiz.findOne({ code });
@@ -232,7 +230,7 @@ app.get('/space',async(req,res)=>{
 //coinscrapper
 
 app.get('/coinscrapper',async(req,res)=>{
-    var code = req.session.gamecode;
+    let code = req.session.gamecode;
     if (code != null){
         req.session.gamecode = null;
         const quiz = await Quiz.findOne({ code });
@@ -247,7 +245,7 @@ app.get('/coinscrapper',async(req,res)=>{
 //doodle fun
 //----
 app.get('/doodle',async(req,res)=>{
-    var code = req.session.gamecode;
+    let code = req.session.gamecode;
     if (code != null){
         req.session.gamecode = null;
         const quiz = await Quiz.findOne({ code });
@@ -263,7 +261,7 @@ app.get('/doodle',async(req,res)=>{
 
 
 app.get('/student/dashboard',requireLogin,(req,res)=>{
-    var valid = req.session.valid;
+    let valid = req.session.valid;
      req.session.valid = null;
 	res.render('dashboard_stud.ejs',{valid});
 });

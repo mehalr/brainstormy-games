@@ -1,246 +1,205 @@
 <!DOCTYPE html>
-<html onclick="jump()">
-<head>
-	<title>Error 404</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-</head>
-<style type="text/css">
-	body {
-      width: 100%;
-      overflow: hidden;
-      background-image: linear-gradient(#FFD30D,#FF800D);
-      background-size: cover;
-    }
-    #board {
-      position: relative;
-      width: 800px;
-      height: 450px;
-      padding: 0px;
-      margin: 10px auto;
-      border: 2px solid white;
-      background: url("background2.jpg");
-      overflow: hidden;
-    }
+<html>
+    <head>
+        <title>Dinosaur adventures</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+    </head>
 
-    #dino {
-      position: absolute;
-      width: 229px;
-      height: 200px;
-      background: url("dino.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-      left: 0%;
-      bottom: 0px;
-    }
+    <style type="text/css">
+        body {
+            width: 100%;
+            overflow: hidden;
+            background-image: linear-gradient(#FFD30D,#FF800D);
+            background-size: cover;
+        }
+        #board{
+            position: relative;
+            width: 800px;
+            height: 450px;
+            padding: 0px;
+            margin: 10px auto;
+            border: 2px solid white;
+            background: url("background2.jpg");
+            overflow: hidden;
+        }
 
-    .animate{
-    animation: jump 10s linear;
-}
-	@keyframes jump{
-	    0%{top: 150px;}
-	    30%{top: 100px;}
-	    70%{top: 100px;}
-	    100%{top: 150px;}
-	}
+        #dino{
+            position: absolute;
+            width: 229px;
+            height: 200px;
+            background: url("dino.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            left: 0%;
+            bottom: 0px;
+        }
 
-    #meteor {
-      width: 80px;
-      height: 57px;
-      background: url("meteor.png");
-	  position: relative;
-	  top: 350px;
-	  left: 700px;
-	  animation: block 5s infinite linear;
-    }
+        .animate{
+          animation: jump 10s linear;
+        }
 
-    @keyframes block{
-    0%{left: 700px}
-    100%{left: -20px}
-}
+        @keyframes jump{
+            0%{top: 150px;}
+            30%{top: 100px;}
+            70%{top: 100px;}
+            100%{top: 150px;}
+        }
 
+        #meteor {
+            width: 80px;
+            height: 57px;
+            background: url("meteor.png");
+            position: relative;
+            top: 350px;
+            left: 700px;
+            animation: block 5s infinite linear;
+          }
 
+        @keyframes block{
+          0%{left: 700px}
+          100%{left: -20px}
+        }
 
-#letter{
-  text-align: center;
-  font-family: 'Black Ops One', cursive;
-  color: #371506;
-  font-size: 60px;
-  margin: 0px;
-  padding: 0px;
-}
+        #letter{
+          text-align: center;
+          font-family: 'Black Ops One', cursive;
+          color: #371506;
+          font-size: 60px;
+          margin: 0px;
+          padding: 0px;
+        }
 
+    </style>
 
+    <body>
+        <p id="letter"><span id="quesSpan"></span></p>
+        <div id="board">
+          <div id="gameover" style="display: none;margin-left: auto;margin-right: auto; background-color: yellow;text-align: center;">
+            <h1 >GAME OVER </h1>
+            <a href="/student/dashboard">
+                <button class="btn btn-primary" style="margin: 10px;">Back to dashboard</button>
+            </a>
+          </div>
+            <div id="dino"></div>
+            <div id="meteor"></div>
+        </div>
+        <p id="letter" style="font-size: 27px;">Score: <span id="scoreSpan"></span></p>
+    </body>
 
+    <script>
+        let dino = document.getElementById("dino");
+        let meteor = document.getElementById("meteor");
+        let counter = count = temp = dino_count = 0;
+        let trial = <%= trial %>;
 
-</style>
-<body>
-  <p id="letter"><span id="quesSpan"></span></p>
+        if (!trial){
+            let questions =  <%-JSON.stringify(question) %>;
+            let answers = <%-JSON.stringify(answer) %>;
+        }else {
+            questions = ['6 + 3 = ?','2 X 6 = ?','6 + 1 = ?','4 X 5 = ?','7 X 3 = ?','6 X 4 = ?','9 X 3 = ?'];
+            answers = ['9','12','7','20','21','24','27'];
+        }
 
+        try{
+            let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            let recognition = new SpeechRecognition();
+        } catch(e){
+            console.error(e);
+            $('.no-browser-support').show();
+            $('.app').hide();
+        }
 
-<div id="board">
+        recognition.continuous = true;
+        recognition.start();
 
-  <div id="gameover" style="display: none;
-    margin-left: auto;
-    margin-right: auto; background-color: yellow;text-align: center;">
-    <h1 >GAME OVER</h1>
-    <a href="/student/dashboard"><button class="btn btn-primary" style="margin: 10px;">Back to dashboard</button></a>
-  </div>
-
-
-	<div id="dino"></div>
-
-	<div id="meteor"></div>
-
-
-
-
-</div>
-
-<p id="letter" style="font-size: 27px;">Score: <span id="scoreSpan"></span></p>
-
-
-</body>
-<script>
-  var dino = document.getElementById("dino");
-var meteor = document.getElementById("meteor");
-var counter=0;
-var count = 0;
-var temp = 0;
-
-var trial = <%= trial %>;
-console.log(trial);
-if ( trial == false){
-    var questions =  <%-JSON.stringify(question) %>;
-    var answers = <%-JSON.stringify(answer) %>;
-
-}else{
-  questions = ['6 + 3 = ?','2 X 6 = ?','6 + 1 = ?','4 X 5 = ?',
-  '7 X 3 = ?','6 X 4 = ?','9 X 3 = ?'];
-  answers = ['9','12','7','20','21','24','27'];
-}
+        if (temp===0){
+            document.getElementById("quesSpan").innerHTML = questions[0]
+        }
 
 
+        function jump(){
+            count++;
+            temp++;
+            let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+            let meteorLeft = parseInt(window.getComputedStyle(meteor).getPropertyValue("left"));
+
+            document.getElementById("quesSpan").innerHTML = questions[count];
+            if(dino.classList == "animate"){
+                return;
+            }
+            dino.classList.add("animate");
+            setTimeout(function(){
+                  dino.classList.remove("animate");
+            },2000);
+        }
 
 
-try {
-  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  var recognition = new SpeechRecognition();
-}
-catch(e) {
-  console.error(e);
-  $('.no-browser-support').show();
-  $('.app').hide();
-}
-
-recognition.continuous = true;
-
-recognition.start();
-
-if (temp==0){
-  document.getElementById("quesSpan").innerHTML = questions[0]
-
-}
+        function gameOver(){
+            dino_count += 1;
+            console.log(dino_count);
+            let gameover = document.getElementById("gameover");
+            gameover.style.display = "block";
+            if (dino_count == 1){
+                score = document.getElementById('scoreSpan').innerHTML
+                let code = <%= code %>
+                code = code.toString();
+                submitScore(score, code);
+            }
+        }
 
 
-function jump(){
-  count++;
-  temp++;
-   let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
-   let meteorLeft = parseInt(window.getComputedStyle(meteor).getPropertyValue("left"));
+        function submitScore(score, game_id){
+            payload = {score, game_id}
+            options = {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+            fetch('/check/',options);
+        }
 
 
-  document.getElementById("quesSpan").innerHTML = questions[count];
-    if(dino.classList == "animate"){return}
-    dino.classList.add("animate");
-    setTimeout(function(){
-        dino.classList.remove("animate");
-    },2000);
-}
-
-var dino_count = 0;
-
-function gameover(){
-	dino_count += 1;
-	console.log(dino_count);
-  var gameover = document.getElementById("gameover");
-  gameover.style.display = "block";
-	if (dino_count == 1){
-		score = document.getElementById('scoreSpan').innerHTML
-		var code = <%= code %>
-		code = code.toString();
-		console.log(code);
-		submitscore(score, code);
-	}
-}
-
-
-function submitscore(score, game_id){
-	payload = {score, game_id}
-	options = {
-		method: 'post',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(payload)
-	};
-	fetch('/check/',options);
-}
-
-
-var checkDead = setInterval(function() {
-    let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
-   let meteorLeft = parseInt(window.getComputedStyle(meteor).getPropertyValue("left"));
-    if(meteorLeft<20 && meteorLeft>-20 && dinoTop>=200){
-       // console.log(meteorLeft)
-       // console.log(dinoTop)
-        meteor.style.animation = "none";
-        // recognition.stop();
-        gameover();
-        counter=0;
-        meteor.style.animation = "block 5s infinite linear";
-    }else{
-        document.getElementById("scoreSpan").innerHTML = counter;
-    }
-}, 10);
+         let checkDead = setInterval(function() {
+         let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+         let meteorLeft = parseInt(window.getComputedStyle(meteor).getPropertyValue("left"));
+         if(meteorLeft<20 && meteorLeft>-20 && dinoTop>=200){
+              meteor.style.animation = "none";
+              gameOver();
+              counter=0;
+              meteor.style.animation = "block 5s infinite linear";
+         } else{
+              document.getElementById("scoreSpan").innerHTML = counter;
+         }
+        }, 10);
 
 
 
-// This block is called every time the Speech APi captures a line.
-recognition.onresult = function(event) {
+        // This block is called every time the Speech APi captures a line.
+        recognition.onresult = function(event) {
+            // event is a SpeechRecognitionEvent object.
+            // It holds all the lines we have captured so far.
+            // We only need the current one.
+            let current = event.resultIndex;
+            let transcript = event.results[current][0].transcript;
 
-  // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far.
-  // We only need the current one.
-  var current = event.resultIndex;
+            checkAns(transcript);
+            console.log(transcript);
+        }
 
-  // Get a transcript of what was said.
-  var transcript = event.results[current][0].transcript;
-
-  checkAns(transcript)
-
-
-  console.log(transcript)
-
-
-  // console.log('yes')
-  // jump();
-}
-
-function checkAns(transcript) {
-  // body...
-  if (transcript == answers[count] || transcript == " "+answers[count]){
-    jump();
-    counter+=10;
-    console.log(count)
-  }else{
-    console.log(transcript)
-    console.log('no')
-  }
-}
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        function checkAns(transcript) {
+            if (transcript == answers[count] || transcript == " " +answers[count]){
+              jump();
+              counter+=10;
+            }else{
+              console.log(transcript)
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </html>
