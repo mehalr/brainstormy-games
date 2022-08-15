@@ -1,0 +1,63 @@
+body {
+    width: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(#FFD30D,#FF800D);
+    background-size: cover;
+}
+
+#board{
+    position: relative;
+    width: 800px;
+    height: 450px;
+    padding: 0px;
+    margin: 10px auto;
+    border: 2px solid white;
+    background: url("background2.jpg");
+    overflow: hidden;
+}
+
+#dino{
+    position: absolute;
+    width: 229px;
+    height: 200px;
+    background: url("dino.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 0%;
+    bottom: 0px;
+}
+
+.animate{
+  animation: jump 10s linear;
+}
+
+@keyframes jump{
+    0%{top: 150px;}
+    30%{top: 100px;}
+    70%{top: 100px;}
+    100%{top: 150px;}
+}
+
+#meteor {
+    width: 80px;
+    height: 57px;
+    background: url("meteor.png");
+    position: relative;
+    top: 350px;
+    left: 700px;
+    animation: block 5s infinite linear;
+  }
+
+@keyframes block{
+  0%{left: 700px}
+  100%{left: -20px}
+}
+
+#letter{
+  text-align: center;
+  font-family: 'Black Ops One', cursive;
+  color: #371506;
+  font-size: 60px;
+  margin: 0px;
+  padding: 0px;
+}
