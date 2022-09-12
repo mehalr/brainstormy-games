@@ -8,6 +8,16 @@ Brainstormy is an intuitive web application for making customizable educational 
 - MongoDb
 - HTML/CSS
 
+## Requirements
+
+For development, you will only need Node.js.
+
+## Running the project
+
+    $ git clone https://github.com/mehalr/brainstormy-games
+    $ cd brainstormy-games
+    $ npm install
+    $ node index.js
 
 
 ## Screenshots
